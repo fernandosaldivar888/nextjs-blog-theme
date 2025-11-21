@@ -14,7 +14,7 @@ import CustomImage from '../../components/CustomImage';
 import CustomLink from '../../components/CustomLink';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import Layout, { GradientBackground } from '../../components/Layout';
+import Layout from '../../components/Layout';
 import SEO from '../../components/SEO';
 
 // Custom components/renderers to pass to MDX.
@@ -45,38 +45,44 @@ export default function PostPage({
         description={frontMatter.description}
       />
       <Header name={globalData.name} />
-      <article className="px-6 md:px-0" data-sb-object-id={`posts/${slug}.mdx`}>
-        <header>
+      <article
+        className="mx-auto w-full max-w-3xl rounded-3xl border border-white/10 bg-white/5 px-6 py-10 shadow-[0_35px_80px_-45px_rgba(15,23,42,0.95)] backdrop-blur-xl md:px-10"
+        data-sb-object-id={`posts/${slug}.mdx`}
+      >
+        <header className="text-center">
           <h1
-            className="mb-12 text-3xl text-center md:text-5xl dark:text-white"
+            className="mb-6 text-3xl font-semibold text-white md:text-5xl"
             data-sb-field-path="title"
           >
             {frontMatter.title}
           </h1>
           {frontMatter.description && (
-            <p className="mb-4 text-xl" data-sb-field-path="description">
+            <p
+              className="mx-auto max-w-xl text-lg text-slate-300"
+              data-sb-field-path="description"
+            >
               {frontMatter.description}
             </p>
           )}
         </header>
-        <main>
+        <main className="mt-10">
           <article
-            className="prose dark:prose-invert"
+            className="prose prose-slate max-w-none text-slate-200 dark:prose-invert"
             data-sb-field-path="markdown_content"
           >
             <MDXRemote {...source} components={components} />
           </article>
         </main>
-        <div className="grid mt-12 md:grid-cols-2 lg:-mx-24">
+        <div className="grid mt-12 gap-4 md:grid-cols-2">
           {prevPost && (
             <Link
               href={`/posts/${prevPost.slug}`}
-              className="flex flex-col px-10 py-8 text-center transition border border-gray-800/10 bg-white/10 md:text-right first:rounded-t-lg md:first:rounded-tr-none md:first:rounded-l-lg last:rounded-r-lg last:rounded-b-lg backdrop-blur-lg dark:bg-black/30 hover:bg-white/20 dark:hover:bg-black/50 dark:border-white/10 last:border-t md:border-r-0 md:last:border-r md:last:rounded-r-none"
+              className="flex flex-col rounded-3xl border border-white/10 bg-slate-900/40 px-10 py-8 text-center text-slate-200 transition hover:border-slate-500/40 hover:bg-slate-900/60 md:text-right"
             >
-              <p className="mb-4 text-gray-500 uppercase dark:text-white dark:opacity-60">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
                 Previous
               </p>
-              <h4 className="mb-6 text-2xl text-gray-700 dark:text-white">
+              <h4 className="mb-6 text-2xl font-semibold text-white">
                 {prevPost.title}
               </h4>
               <ArrowIcon className="mx-auto mt-auto transform rotate-180 md:mr-0" />
@@ -85,12 +91,12 @@ export default function PostPage({
           {nextPost && (
             <Link
               href={`/posts/${nextPost.slug}`}
-              className="flex flex-col px-10 py-8 text-center transition border border-t-0 border-b-0 border-gray-800/10 bg-white/10 md:text-left md:first:rounded-t-lg last:rounded-b-lg first:rounded-l-lg md:last:rounded-bl-none md:last:rounded-r-lg backdrop-blur-lg dark:bg-black/30 hover:bg-white/20 dark:hover:bg-black/50 dark:border-white/10 first:border-t first:rounded-t-lg md:border-t last:border-b"
+              className="flex flex-col rounded-3xl border border-white/10 bg-slate-900/40 px-10 py-8 text-center text-slate-200 transition hover:border-slate-500/40 hover:bg-slate-900/60 md:text-left"
             >
-              <p className="mb-4 text-gray-500 uppercase dark:text-white dark:opacity-60">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
                 Next
               </p>
-              <h4 className="mb-6 text-2xl text-gray-700 dark:text-white">
+              <h4 className="mb-6 text-2xl font-semibold text-white">
                 {nextPost.title}
               </h4>
               <ArrowIcon className="mx-auto mt-auto md:ml-0" />
@@ -99,14 +105,6 @@ export default function PostPage({
         </div>
       </article>
       <Footer copyrightText={globalData.footerText} />
-      <GradientBackground
-        variant="large"
-        className="absolute -top-32 opacity-30 dark:opacity-50"
-      />
-      <GradientBackground
-        variant="small"
-        className="absolute bottom-0 opacity-20 dark:opacity-10"
-      />
     </Layout>
   );
 }
